@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wahlomat 1919 – Meine Partei</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+3:wght@300..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-xs:   clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+            --text-sm:   clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+            --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+            --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+            --text-xl:   clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+            --text-2xl:  clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+
+            --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+            --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+            --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+            --space-16: 4rem; --space-20: 5rem;
+
+            --font-display: 'Playfair Display', Georgia, serif;
+            --font-body: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+
+            --color-bg: #f5f2ed;
+            --color-surface: #faf8f4;
+            --color-surface-2: #ffffff;
+            --color-border: oklch(0.35 0.01 60 / 0.15);
+            --color-text: #1e1b16;
+            --color-text-muted: #6b6760;
+            --color-text-faint: #b0ada8;
+            --color-accent: #7c3a1a;
+            --color-accent-light: #f0e8e2;
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --shadow-sm: 0 1px 3px oklch(0.2 0.02 60 / 0.08);
+            --shadow-md: 0 4px 14px oklch(0.2 0.02 60 / 0.10);
+            --shadow-lg: 0 12px 32px oklch(0.2 0.02 60 / 0.14);
+            --transition: 180ms cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; scroll-padding-top: 5rem; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: var(--font-body);
+            font-size: var(--text-base);
+            color: var(--color-text);
+            background: var(--color-bg);
+            line-height: 1.65;
+        }
+
+        /* ── HEADER ── */
+        header {
+            background: var(--color-text);
+            color: #f5f0e8;
+            padding: var(--space-10) 0 var(--space-8);
+            border-bottom: 3px solid var(--color-accent);
+        }
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+        .header-eyebrow {
+            font-size: var(--text-xs);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #b0a898;
+            margin-bottom: var(--space-3);
+        }
+        header h1 {
+            font-family: var(--font-display);
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #f5f0e8;
+        }
+        header h1 em {
+            color: #d4a882;
+            font-style: normal;
+        }
+        .header-sub {
+            margin-top: var(--space-4);
+            font-size: var(--text-sm);
+            color: #8a8070;
+            max-width: 64ch;
+        }
+
+        /* ── NAV TABS ── */
+        .tab-nav {
+            background: var(--color-surface);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        .tab-nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            display: flex;
+            gap: var(--space-1);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .tab-nav-inner::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            padding: var(--space-4) var(--space-5);
+            border: none;
+            background: none;
+            cursor: pointer;
+            color: var(--color-text-muted);
+            border-bottom: 3px solid transparent;
+            transition: color var(--transition), border-color var(--transition);
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .tab-btn:hover { color: var(--color-text); }
+        .tab-btn.active {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+
+        /* ── MAIN LAYOUT ── */
+        .container { max-width: 960px; margin: 0 auto; padding: 0 var(--space-6); }
+
+        /* ── SECTION 1: ÜBERSICHT (Parteikarten) ── */
+        #section-overview { padding: var(--space-12) 0; }
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+        }
+        .section-lead {
+            color: var(--color-text-muted);
+            font-size: var(--text-base);
+            max-width: 68ch;
+            margin-bottom: var(--space-8);
+        }
+
+        .parties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-6);
+        }
+
+        .party-card {
+            background: var(--color-surface-2);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .party-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+        .party-header {
+            padding: var(--space-5) var(--space-6);
+            color: white;
+        }
+        .party-header h2 {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin: 0;
+        }
+        .party-fullname {
+            display: block;
+            font-family: var(--font-body);
+            font-size: var(--text-xs);
+            opacity: 0.88;
+            margin-top: var(--space-1);
+            font-weight: 400;
+        }
+        .party-content { padding: var(--space-5) var(--space-6); }
+        .party-point {
+            margin-bottom: var(--space-4);
+            padding-left: var(--space-4);
+            border-left: 2px solid;
+        }
+        .party-point:last-child { margin-bottom: 0; }
+        .party-point strong {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+        .party-point p {
+            font-size: var(--text-sm);
+            color: var(--color-text-muted);
+            max-width: 100%;
+            margin: 0;
+        }
+
+        /* Parteispezifische Farben */
+        .spd .party-header { background: #E3000F; }
+        .spd .party-point { border-color: #E3000F; }
+        .kpd .party-header { background: #B71C1C; }
+        .kpd .party-point { border-color: #B71C1C; }
+        .zentrum .party-header { background: #4A5568; }
+        .zentrum .party-point { border-color: #4A5568; }
+        .nsdap .party-header { background: #2C2C2C; }
+        .nsdap .party-point { border-color: #2C2C2C; }
+        .dvp .party-header { background: #2563EB; }
+        .dvp .party-point { border-color: #2563EB; }
+        .uspd .party-header { background: #C2410C; }
+        .uspd .party-point { border-color: #C2410C; }
+        .dnvp .party-header { background: #78350F; }
+        .dnvp .party-point { border-color: #78350F; }
+        .ddp .party-header { background: #1E40AF; }
+        .ddp .party-point { border-color: #1E40AF; }
+
+        /* ── SECTION 2: MEINE PARTEI ── */
+        #section-detail { padding: var(--space-12) 0; display: none; }
+        #section-detail.visible { display: block; }
+
+        .party-selector-wrap {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            margin-bottom: var(--space-8);
+            box-shadow: var(--shadow-sm);
+        }
+        .party-selector-label {
+            font-size: var(--text-sm);
+            font-weight: 700;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: var(--space-4);
+            display: block;
+        }
+        .party-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+        }
+        .party-pill {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-full, 9999px);
+            border: 2px solid transparent;
+            cursor: pointer;
+            color: white;
+            transition: opacity var(--transition), transform var(--transition), box-shadow var(--transition);
+        }
+        .party-pill:hover { opacity: 0.85; transform: scale(1.04); }
+        .party-pill.selected {
+            box-shadow: 0 0 0 3px white, 0 0 0 5px currentColor;
+        }
+        .party-pill.spd-pill  { background: #E3000F; }
+        .party-pill.kpd-pill  { background: #B71C1C; }
+        .party-pill.zentrum-pill { background: #4A5568; }
+        .party-pill.nsdap-pill { background: #2C2C2C; }
+        .party-pill.dvp-pill  { background: #2563EB; }
+        .party-pill.uspd-pill { background: #C2410C; }
+        .party-pill.dnvp-pill { background: #78350F; }
+        .party-pill.ddp-pill  { background: #1E40AF; }
+
+        /* Detail-Panel */
+        .detail-panel { display: none; }
+        .detail-panel.active { display: block; }
+
+        .detail-hero {
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            margin-bottom: var(--space-8);
+            box-shadow: var(--shadow-md);
+        }
+        .detail-hero-header {
+            padding: var(--space-8) var(--space-8) var(--space-6);
+            color: white;
+            position: relative;
+        }
+        .detail-hero-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, oklch(0 0 0 / 0.25) 0%, oklch(0 0 0 / 0) 70%);
+            pointer-events: none;
+        }
+        .detail-hero-tag {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: oklch(1 0 0 / 0.2);
+            border-radius: var(--radius-sm);
+            padding: var(--space-1) var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+        .detail-hero-title {
+            font-family: var(--font-display);
+            font-size: var(--text-xl);
+            font-weight: 700;
+            line-height: 1.15;
+            position: relative;
+            z-index: 1;
+        }
+        .detail-hero-subtitle {
+            font-size: var(--text-sm);
+            opacity: 0.88;
+            margin-top: var(--space-2);
+            position: relative;
+            z-index: 1;
+        }
+        .detail-hero-body {
+            background: var(--color-surface-2);
+            padding: var(--space-6) var(--space-8);
+            border-top: 1px solid var(--color-border);
+        }
+        .detail-hero-body p {
+            font-size: var(--text-base);
+            color: var(--color-text-muted);
+            max-width: 72ch;
+            margin: 0;
+        }
+
+        /* Tabs inner für Detail */
+        .detail-tabs { display: flex; gap: var(--space-2); margin-bottom: var(--space-6); flex-wrap: wrap; }
+        .detail-tab {
+            font-family: var(--font-body);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            padding: var(--space-2) var(--space-5);
+            border-radius: var(--radius-full, 9999px);
+            border: 2px solid var(--color-border);
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            cursor: pointer;
+            transition: all var(--transition);
+        }
+        .detail-tab:hover { border-color: var(--color-text-muted); color: var(--color-text); }
+        .detail-tab.active {
+            background: var(--color-text);
+            color: white;
+            border-color: var(--color-text);
+        }
+
+        .detail-content-panel { display: none; }
+        .detail-content-panel.active { display: block; }
+
+        /* Info-Kacheln */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-8);
+        }
+        .info-tile {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5) var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+        .info-tile-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--color-text-faint);
+            margin-bottom: var(--space-2);
+        }
+        .info-tile-value {
+            font-size: var(--text-base);
+            font-weight: 600;
+            color: var(--color-text);
+        }
+
+        /* Forderungen-Liste */
+        .demand-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-4); }
+        .demand-item {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5) var(--space-6);
+            display: flex;
+            gap: var(--space-4);
+            align-items: flex-start;
+            box-shadow: var(--shadow-sm);
+        }
+        .demand-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+        .demand-body strong {
+            display: block;
+            font-size: var(--text-sm);
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+        .demand-body p { font-size: var(--text-sm); color: var(--color-text-muted); margin: 0; max-width: 100%; }
+
+        /* Spektrum-Balken */
+        .spectrum-section { margin-bottom: var(--space-8); }
+        .spectrum-row {
+            display: grid;
+            grid-template-columns: 140px 1fr;
+            gap: var(--space-4);
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+        .spectrum-label { font-size: var(--text-sm); color: var(--color-text-muted); font-weight: 600; }
+        .spectrum-track {
+            background: var(--color-bg);
+            border-radius: var(--radius-full, 9999px);
+            height: 10px;
+            overflow: hidden;
+            border: 1px solid var(--color-border);
+        }
+        .spectrum-fill {
+            height: 100%;
+            border-radius: var(--radius-full, 9999px);
+            transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .spectrum-pole {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--text-xs);
+            color: var(--color-text-faint);
+            margin-top: var(--space-1);
+            grid-column: 2;
+        }
+
+        /* Arbeitsauftrag */
+        .task-box {
+            background: var(--color-accent-light);
+            border: 1.5px solid oklch(0.45 0.1 30 / 0.25);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            margin-top: var(--space-8);
+        }
+        .task-box-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+        .task-icon {
+            width: 40px; height: 40px;
+            background: var(--color-accent);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .task-box-header h3 {
+            font-family: var(--font-display);
+            font-size: var(--text-lg);
+            font-weight: 700;
+        }
+        .task-list { list-style: none; display: flex; flex-direction: column; gap: var(--space-3); }
+        .task-list li {
+            display: flex;
+            gap: var(--space-3);
+            align-items: flex-start;
+            font-size: var(--text-base);
+        }
+        .task-num {
+            width: 28px; height: 28px;
+            background: var(--color-accent);
+            color: white;
+            border-radius: var(--radius-full, 9999px);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ── SECTION 3: VERGLEICH ── */
+        #section-compare { padding: var(--space-12) 0; display: none; }
+        #section-compare.visible { display: block; }
+
+        .compare-table-wrap {
+            overflow-x: auto;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+            margin-top: var(--space-6);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-surface-2);
+            font-size: var(--text-sm);
+        }
+        th {
+            background: var(--color-text);
+            color: #f5f0e8;
+            padding: var(--space-4) var(--space-5);
+            text-align: left;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        td {
+            padding: var(--space-4) var(--space-5);
+            border-bottom: 1px solid var(--color-border);
+            vertical-align: top;
+        }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--color-bg); }
+        .badge {
+            display: inline-block;
+            font-size: var(--text-xs);
+            font-weight: 700;
+            padding: 2px var(--space-3);
+            border-radius: var(--radius-full, 9999px);
+            color: white;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            text-align: center;
+            padding: var(--space-10) var(--space-6);
+            color: var(--color-text-faint);
+            font-size: var(--text-xs);
+            border-top: 1px solid var(--color-border);
+            margin-top: var(--space-12);
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 640px) {
+            .parties-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .spectrum-row { grid-template-columns: 1fr; }
+            .spectrum-pole { grid-column: 1; }
+            .detail-hero-header { padding: var(--space-6); }
+            .detail-hero-body { padding: var(--space-5) var(--space-6); }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-inner">
+        <div class="header-eyebrow">Weimarer Republik · Wahl zur Nationalversammlung 1919</div>
+        <h1>Politische Parteien<br><em>1919</em></h1>
+        <p class="header-sub">Nach dem Wahlomat: Lerne jetzt deine Partei kennen – ihre Ziele, ihre Wählerschaft und ihre Rolle in der Geschichte der Weimarer Republik.</p>
+    </div>
+</header>
+
+<nav class="tab-nav" aria-label="Seitennavigation">
+    <div class="tab-nav-inner">
+        <button class="tab-btn active" data-section="overview">📋 Parteienübersicht</button>
+        <button class="tab-btn" data-section="detail">🔍 Meine Partei</button>
+        <button class="tab-btn" data-section="compare">⚖️ Parteienvergleich</button>
+    </div>
+</nav>
+
+<main>
+<!-- ══════════════════════════════════════════
+     SECTION 1: ÜBERSICHT
+══════════════════════════════════════════ -->
+<section id="section-overview">
+<div class="container">
+    <h2 class="section-heading">Die Parteien im Überblick</h2>
+    <p class="section-lead">1919 traten bei der Wahl zur Nationalversammlung acht große Parteien an. Hier findest du eine Übersicht ihrer wichtigsten politischen Forderungen.</p>
+
+    <div class="parties-grid">
+
+        <!-- SPD -->
+        <div class="party-card spd">
+            <div class="party-header">
+                <h2>SPD <span class="party-fullname">Sozialdemokratische Partei Deutschlands</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Soziale Gerechtigkeit</strong><p>Forderung nach sozialen Reformen zur Verbesserung der Lebensbedingungen der Arbeiterklasse.</p></div>
+                <div class="party-point"><strong>Demokratie</strong><p>Stärkung der parlamentarischen Demokratie und der Bürgerrechte.</p></div>
+                <div class="party-point"><strong>Bildung</strong><p>Zugang zu Bildung für alle, Förderung von Schulen und Universitäten.</p></div>
+                <div class="party-point"><strong>Wirtschaft</strong><p>Einführung von Arbeitszeitverkürzungen und sozialer Absicherung.</p></div>
+            </div>
+        </div>
+
+        <!-- KPD -->
+        <div class="party-card kpd">
+            <div class="party-header">
+                <h2>KPD <span class="party-fullname">Kommunistische Partei Deutschlands</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Revolution</strong><p>Forderung nach einer sozialistischen Revolution zur Errichtung einer Diktatur des Proletariats.</p></div>
+                <div class="party-point"><strong>Kampf gegen Kapitalismus</strong><p>Ablehnung des Kapitalismus und der Weimarer Republik.</p></div>
+                <div class="party-point"><strong>Soziale Gleichheit</strong><p>Vollständige Gleichheit und Abschaffung der Klassenunterschiede.</p></div>
+                <div class="party-point"><strong>Internationale Solidarität</strong><p>Unterstützung der internationalen kommunistischen Bewegung.</p></div>
+            </div>
+        </div>
+
+        <!-- Zentrum -->
+        <div class="party-card zentrum">
+            <div class="party-header">
+                <h2>Zentrum <span class="party-fullname">Zentrumspartei</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Religiöse Freiheit</strong><p>Schutz der Rechte der katholischen Bevölkerung.</p></div>
+                <div class="party-point"><strong>Soziale Gerechtigkeit</strong><p>Unterstützung sozialer Reformen zur Verbesserung der Lebensbedingungen.</p></div>
+                <div class="party-point"><strong>Stabilität</strong><p>Förderung politischer Stabilität und Zusammenarbeit in der Weimarer Koalition.</p></div>
+                <div class="party-point"><strong>Bildung</strong><p>Verbesserung des Bildungswesens, insbesondere im katholischen Bereich.</p></div>
+            </div>
+        </div>
+
+        <!-- NSDAP -->
+        <div class="party-card nsdap">
+            <div class="party-header">
+                <h2>NSDAP <span class="party-fullname">Nationalsozialistische Deutsche Arbeiterpartei</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Nationalismus</strong><p>Fokus auf die Wiederherstellung des „deutschen Reiches".</p></div>
+                <div class="party-point"><strong>Antisemitismus</strong><p>Offene Ablehnung und Verfolgung von Juden und anderen Minderheiten.</p></div>
+                <div class="party-point"><strong>Soziale Wohlfahrt</strong><p>Versprechen von sozialen Programmen zur Unterstützung der „deutschen Arbeiter".</p></div>
+                <div class="party-point"><strong>Militarismus</strong><p>Wiederaufrüstung und Stärkung der deutschen Wehrmacht.</p></div>
+            </div>
+        </div>
+
+        <!-- DVP -->
+        <div class="party-card dvp">
+            <div class="party-header">
+                <h2>DVP <span class="party-fullname">Deutsche Volkspartei</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Wirtschaft</strong><p>Förderung der industriellen Entwicklung und des Mittelstands.</p></div>
+                <div class="party-point"><strong>Nationalismus</strong><p>Unterstützung einer starken nationalen Identität.</p></div>
+                <div class="party-point"><strong>Soziale Stabilität</strong><p>Maßnahmen zur Sicherung der sozialen Stabilität.</p></div>
+                <div class="party-point"><strong>Bildung</strong><p>Verbesserung des Bildungswesens zur Förderung der wirtschaftlichen Entwicklung.</p></div>
+            </div>
+        </div>
+
+        <!-- USPD -->
+        <div class="party-card uspd">
+            <div class="party-header">
+                <h2>USPD <span class="party-fullname">Unabhängige Sozialdemokratische Partei Deutschlands</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Soziale Revolution</strong><p>Forderung nach radikalen sozialen und politischen Veränderungen.</p></div>
+                <div class="party-point"><strong>Anti-Kriegs-Politik</strong><p>Ablehnung des Ersten Weltkriegs und seiner Folgen.</p></div>
+                <div class="party-point"><strong>Demokratische Kontrolle</strong><p>Stärkung der demokratischen Kontrolle über die Wirtschaft.</p></div>
+                <div class="party-point"><strong>Solidarität</strong><p>Unterstützung der Arbeiterbewegung und der Gewerkschaften.</p></div>
+            </div>
+        </div>
+
+        <!-- DNVP -->
+        <div class="party-card dnvp">
+            <div class="party-header">
+                <h2>DNVP <span class="party-fullname">Deutschnationale Volkspartei</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Monarchismus</strong><p>Rückkehr zu monarchistischen Strukturen.</p></div>
+                <div class="party-point"><strong>Nationalismus</strong><p>Starker Fokus auf nationale Identität und Ablehnung der Republik.</p></div>
+                <div class="party-point"><strong>Soziale Ordnung</strong><p>Unterstützung traditioneller Werte und sozialer Hierarchien.</p></div>
+                <div class="party-point"><strong>Militarismus</strong><p>Stärkung der militärischen Kräfte Deutschlands.</p></div>
+            </div>
+        </div>
+
+        <!-- DDP -->
+        <div class="party-card ddp">
+            <div class="party-header">
+                <h2>DDP <span class="party-fullname">Deutsche Demokratische Partei</span></h2>
+            </div>
+            <div class="party-content">
+                <div class="party-point"><strong>Liberale Werte</strong><p>Verteidigung individueller Freiheiten und bürgerlicher Rechte.</p></div>
+                <div class="party-point"><strong>Soziale Reformen</strong><p>Unterstützung von sozialen Reformen.</p></div>
+                <div class="party-point"><strong>Bildung</strong><p>Förderung von Bildung und Wissenschaft.</p></div>
+                <div class="party-point"><strong>Wirtschaft</strong><p>Unterstützung einer marktwirtschaftlichen Ordnung mit sozialer Verantwortung.</p></div>
+            </div>
+        </div>
+
+    </div><!-- .parties-grid -->
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 2: MEINE PARTEI (Detail)
+══════════════════════════════════════════ -->
+<section id="section-detail">
+<div class="container">
+    <h2 class="section-heading">Meine Partei</h2>
+    <p class="section-lead">Wähle die Partei aus, die der Wahlomat für dich ermittelt hat. Erforsche dann ihre Geschichte, ihre Wähler und ihre wichtigsten Forderungen.</p>
+
+    <div class="party-selector-wrap">
+        <span class="party-selector-label">Welche Partei hat der Wahlomat für dich ermittelt?</span>
+        <div class="party-pills" id="party-pills">
+            <button class="party-pill spd-pill" data-party="spd">SPD</button>
+            <button class="party-pill kpd-pill" data-party="kpd">KPD</button>
+            <button class="party-pill zentrum-pill" data-party="zentrum">Zentrum</button>
+            <button class="party-pill nsdap-pill" data-party="nsdap">NSDAP</button>
+            <button class="party-pill dvp-pill" data-party="dvp">DVP</button>
+            <button class="party-pill uspd-pill" data-party="uspd">USPD</button>
+            <button class="party-pill dnvp-pill" data-party="dnvp">DNVP</button>
+            <button class="party-pill ddp-pill" data-party="ddp">DDP</button>
+        </div>
+    </div>
+
+    <!-- ░░░ SPD ░░░ -->
+    <div class="detail-panel" id="detail-spd">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#E3000F;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">SPD · Sozialdemokratische Partei Deutschlands</h3>
+                <p class="detail-hero-subtitle">Gegründet 1863 · Linkes Spektrum · Befürworter der Weimarer Republik</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die SPD war 1919 die stärkste Partei und erhielt bei der Wahl zur Nationalversammlung 37,9 % der Stimmen. Unter Führung von Friedrich Ebert prägte sie den Aufbau der Weimarer Republik entscheidend mit – als erste demokratische Massenpartei Deutschlands.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="spd-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="spd-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="spd-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="spd-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="spd-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">37,9 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">165 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1863 (als ADAV)</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfigur 1919</div><div class="info-tile-value">Friedrich Ebert</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Industriearbeiter, Gewerkschaften</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Gründungspartei, Weimarer Koalition</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="spd-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#fde8e8;">⚖️</div><div class="demand-body"><strong>Soziale Gerechtigkeit</strong><p>Einführung des 8-Stunden-Arbeitstags, Mindestlöhne und soziale Absicherung für Arbeiter und ihre Familien.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fde8e8;">🗳️</div><div class="demand-body"><strong>Parlamentarische Demokratie</strong><p>Aufbau einer stabilen Demokratie mit allgemeinem Wahlrecht – erstmals auch für Frauen.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fde8e8;">📚</div><div class="demand-body"><strong>Bildung für alle</strong><p>Kostenloses Schulwesen, Abschaffung von Schulgebühren, bessere Ausbildungsmöglichkeiten für Arbeiterkinder.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fde8e8;">🏭</div><div class="demand-body"><strong>Verstaatlichung</strong><p>Forderung nach staatlicher Kontrolle über Schlüsselindustrien, um Ausbeutung zu verhindern.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fde8e8;">🕊️</div><div class="demand-body"><strong>Frieden & Versöhnung</strong><p>Akzeptanz des Versailler Vertrags als schmerzhafter, aber notwendiger Schritt für den Frieden.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="spd-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row">
+                    <span class="spectrum-label">Links–Rechts</span>
+                    <div><div class="spectrum-track"><div class="spectrum-fill" style="width:25%;background:#E3000F;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div>
+                </div>
+                <div class="spectrum-row">
+                    <span class="spectrum-label">Demokratie</span>
+                    <div><div class="spectrum-track"><div class="spectrum-fill" style="width:90%;background:#E3000F;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div>
+                </div>
+                <div class="spectrum-row">
+                    <span class="spectrum-label">Wirtschaft</span>
+                    <div><div class="spectrum-track"><div class="spectrum-fill" style="width:30%;background:#E3000F;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div>
+                </div>
+                <div class="spectrum-row">
+                    <span class="spectrum-label">Religion</span>
+                    <div><div class="spectrum-track"><div class="spectrum-fill" style="width:15%;background:#E3000F;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div>
+                </div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="spd-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur SPD</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Erkläre, warum die SPD 1919 so viele Stimmen erhielt. Welche Wählergruppen sprach sie besonders an?</span></li>
+                    <li><span class="task-num">2</span><span>Welche der SPD-Forderungen siehst du noch heute in der Politik? Nenne ein aktuelles Beispiel.</span></li>
+                    <li><span class="task-num">3</span><span>Friedrich Ebert war der erste Reichspräsident. Suche heraus: Welche Entscheidung wurde ihm von Linken und Rechten gleichermaßen vorgeworfen?</span></li>
+                    <li><span class="task-num">4</span><span>Vergleiche: Inwiefern unterscheidet sich die SPD von der USPD? Was trennte die beiden Parteien?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ KPD ░░░ -->
+    <div class="detail-panel" id="detail-kpd">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#B71C1C;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">KPD · Kommunistische Partei Deutschlands</h3>
+                <p class="detail-hero-subtitle">Gegründet 1918 · Linkes Spektrum · Gegner der Weimarer Republik</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die KPD wurde im Dezember 1918 von Rosa Luxemburg und Karl Liebknecht gegründet. Sie lehnte die Weimarer Republik als „bürgerliche" Lösung ab und strebte eine sozialistische Revolution nach sowjetischem Vorbild an. Bei der Wahl 1919 beteiligte sie sich nicht.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="kpd-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="kpd-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="kpd-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="kpd-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="kpd-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahl 1919</div><div class="info-tile-value">Boykott (kein Ergebnis)</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">Dezember 1918</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründerinnen</div><div class="info-tile-value">Rosa Luxemburg, Karl Liebknecht</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Radikale Arbeiter, Revolutionäre</div></div>
+                <div class="info-tile"><div class="info-tile-label">Vorbild</div><div class="info-tile-value">Russische Oktoberrevolution 1917</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Fundamentalopposition</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="kpd-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#fce8e8;">✊</div><div class="demand-body"><strong>Sozialistische Revolution</strong><p>Sturz der bürgerlichen Regierung und Errichtung einer Räterepublik nach sowjetischem Vorbild.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fce8e8;">🏭</div><div class="demand-body"><strong>Verstaatlichung aller Betriebe</strong><p>Alle Produktionsmittel sollten dem Volk gehören – keine privaten Unternehmen mehr.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fce8e8;">⚖️</div><div class="demand-body"><strong>Vollständige Gleichheit</strong><p>Abschaffung aller Klassenunterschiede und Privilegien.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fce8e8;">🌍</div><div class="demand-body"><strong>Weltrevolution</strong><p>Internationale Solidarität mit kommunistischen Bewegungen weltweit.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="kpd-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:5%;background:#B71C1C;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:10%;background:#B71C1C;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:5%;background:#B71C1C;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:5%;background:#B71C1C;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="kpd-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur KPD</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Warum boykottierte die KPD die Wahl zur Nationalversammlung 1919?</span></li>
+                    <li><span class="task-num">2</span><span>Was ist der Spartakusaufstand? Recherchiere, wer ihn anführte und wie er endete.</span></li>
+                    <li><span class="task-num">3</span><span>Was unterscheidet den Kommunismus vom Sozialismus der SPD?</span></li>
+                    <li><span class="task-num">4</span><span>Rosa Luxemburg wurde ermordet. Durch wen und warum? Was sagt das über die politische Gewalt in der Frühphase der WR aus?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ ZENTRUM ░░░ -->
+    <div class="detail-panel" id="detail-zentrum">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#4A5568;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">Zentrum · Zentrumspartei</h3>
+                <p class="detail-hero-subtitle">Gegründet 1870 · Politische Mitte · Weimarer Koalition</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Das Zentrum erzielte 1919 rund 19,7 % der Stimmen und war Teil der Weimarer Koalition. Als katholische Volkspartei verband es konservative Werte mit der Bereitschaft zur demokratischen Zusammenarbeit. Mit Matthias Erzberger stellte es einen der wichtigsten Politiker der frühen Republik.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="zentrum-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="zentrum-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="zentrum-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="zentrum-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="zentrum-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">19,7 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">91 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1870</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfigur</div><div class="info-tile-value">Matthias Erzberger</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Katholiken, bürgerliche Mitte</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Weimarer Koalition, Kompromisspartei</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="zentrum-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#edf0f5;">⛪</div><div class="demand-body"><strong>Religiöse Freiheit</strong><p>Schutz der Rechte der katholischen Kirche und konfessioneller Schulen.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#edf0f5;">🤝</div><div class="demand-body"><strong>Politische Stabilität</strong><p>Zusammenarbeit mit SPD und DDP für eine stabile parlamentarische Demokratie.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#edf0f5;">👨‍👩‍👧</div><div class="demand-body"><strong>Familie und Soziales</strong><p>Stärkung der Familie als gesellschaftliche Grundeinheit, soziale Absicherung.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#edf0f5;">📚</div><div class="demand-body"><strong>Konfessionelles Bildungswesen</strong><p>Erhalt und Förderung katholischer Schulen und Universitäten.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="zentrum-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:55%;background:#4A5568;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:75%;background:#4A5568;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:55%;background:#4A5568;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:90%;background:#4A5568;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="zentrum-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zum Zentrum</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Was ist die Weimarer Koalition? Aus welchen Parteien bestand sie und was waren ihre gemeinsamen Ziele?</span></li>
+                    <li><span class="task-num">2</span><span>Erkläre, warum das Zentrum eine „Milieupartei" war. Was bedeutet das?</span></li>
+                    <li><span class="task-num">3</span><span>Matthias Erzberger unterzeichnete 1918 den Waffenstillstand. Warum machte ihn das zur Zielscheibe von Nationalisten?</span></li>
+                    <li><span class="task-num">4</span><span>1933 stimmte das Zentrum für das Ermächtigungsgesetz. Wie erklärst du dir diesen Schritt?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ NSDAP ░░░ -->
+    <div class="detail-panel" id="detail-nsdap">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#2C2C2C;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">NSDAP · Nationalsozialistische Deutsche Arbeiterpartei</h3>
+                <p class="detail-hero-subtitle">Gegründet 1919/1920 · Rechtsextrem · Feind der Demokratie</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die NSDAP spielte bei der Wahl 1919 noch keine Rolle – sie wurde erst im Februar 1920 unter Hitler zur NSDAP umbenannt. Ihre Ideologie verband extremen Nationalismus mit Antisemitismus und dem Versprechen einer „Volksgemeinschaft". Ihr Aufstieg führte 1933 zur Zerstörung der Demokratie.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="nsdap-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="nsdap-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="nsdap-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="nsdap-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="nsdap-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahl 1919</div><div class="info-tile-value">Noch nicht existent</div></div>
+                <div class="info-tile"><div class="info-tile-label">Umbenennung</div><div class="info-tile-value">Februar 1920</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfigur</div><div class="info-tile-value">Adolf Hitler (ab 1921)</div></div>
+                <div class="info-tile"><div class="info-tile-label">Ideologie</div><div class="info-tile-value">Nationalsozialismus, Antisemitismus</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Krisenprofiteur – v. a. ab 1930</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Zerstörerin der Demokratie 1933</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="nsdap-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#e8e8e8;">🇩🇪</div><div class="demand-body"><strong>Nationalismus & „Volksgemeinschaft"</strong><p>Betonung einer exklusiven deutschen Gemeinschaft – unter Ausschluss von Juden, Roma und anderen Minderheiten.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8e8e8;">☠️</div><div class="demand-body"><strong>Antisemitismus</strong><p>Offener Hass auf Juden als zentrales Merkmal der NSDAP-Ideologie – der direkte Weg zu Holocaust und Völkermord.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8e8e8;">⚔️</div><div class="demand-body"><strong>Militarismus & Revisionismus</strong><p>Ablehnung des Versailler Vertrags, Wiederaufrüstung, Expansion nach Osten („Lebensraum").</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8e8e8;">👑</div><div class="demand-body"><strong>Führerprinzip</strong><p>Ablehnung der Demokratie – stattdessen uneingeschränkte Macht für den „Führer".</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="nsdap-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:98%;background:#2C2C2C;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:2%;background:#2C2C2C;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:60%;background:#2C2C2C;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:40%;background:#2C2C2C;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="nsdap-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur NSDAP</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Die NSDAP existierte 1919 noch nicht. Wann und warum entstand sie? Was sind die Vorläuferorganisationen?</span></li>
+                    <li><span class="task-num">2</span><span>Warum gewann die NSDAP ausgerechnet in der Wirtschaftskrise ab 1929 so viele Wähler?</span></li>
+                    <li><span class="task-num">3</span><span>Was bedeutet „Antisemitismus"? Erkläre, wie er in der NSDAP-Propaganda eingesetzt wurde.</span></li>
+                    <li><span class="task-num">4</span><span>Was ist das Ermächtigungsgesetz von 1933 und warum gilt es als Ende der Weimarer Demokratie?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ DVP ░░░ -->
+    <div class="detail-panel" id="detail-dvp">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#2563EB;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">DVP · Deutsche Volkspartei</h3>
+                <p class="detail-hero-subtitle">Gegründet 1918 · Rechtsliberales Spektrum · Gustav Stresemann</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die DVP erzielte 1919 rund 4,4 % und vertrat die Interessen des Bürgertums und der Industrie. Ihr bekanntester Politiker, Gustav Stresemann, wurde später als Außenminister zum wichtigsten Staatsmann der Stabilisierungsphase (1924–1929) und erhielt den Friedensnobelpreis.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="dvp-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="dvp-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="dvp-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="dvp-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="dvp-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">4,4 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">19 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1918</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfigur</div><div class="info-tile-value">Gustav Stresemann</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Bürgertum, Industrie</div></div>
+                <div class="info-tile"><div class="info-tile-label">Friedensnobelpreis</div><div class="info-tile-value">Stresemann 1926</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="dvp-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eefb;">💼</div><div class="demand-body"><strong>Wirtschaftsliberalismus</strong><p>Freie Marktwirtschaft, Förderung von Industrie und Unternehmertum, Ablehnung übermäßiger Staatseingriffe.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eefb;">🏛️</div><div class="demand-body"><strong>Konstitutionelle Monarchie</strong><p>Anfangs Sympathien für Monarchie, später pragmatische Akzeptanz der Republik.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eefb;">🤝</div><div class="demand-body"><strong>Außenpolitische Entspannung</strong><p>Unter Stresemann: Annäherung an Frankreich, Beitritt zum Völkerbund, Locarno-Verträge.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eefb;">🎓</div><div class="demand-body"><strong>Bildung & Bürgerrechte</strong><p>Förderung von Bildung und wissenschaftlichem Fortschritt im Dienst der nationalen Stärke.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="dvp-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:70%;background:#2563EB;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:65%;background:#2563EB;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:80%;background:#2563EB;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:50%;background:#2563EB;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="dvp-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur DVP</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Wofür steht der Begriff „Wirtschaftsliberalismus"? Erkläre ihn in eigenen Worten.</span></li>
+                    <li><span class="task-num">2</span><span>Was sind die Locarno-Verträge? Welche Bedeutung hatten sie für Deutschland?</span></li>
+                    <li><span class="task-num">3</span><span>Stresemann regierte nur 100 Tage als Reichskanzler. Warum ist er trotzdem so bedeutend?</span></li>
+                    <li><span class="task-num">4</span><span>Wie veränderte sich die DVP nach Stresemanns Tod 1929?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ USPD ░░░ -->
+    <div class="detail-panel" id="detail-uspd">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#C2410C;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">USPD · Unabhängige Sozialdemokratische Partei Deutschlands</h3>
+                <p class="detail-hero-subtitle">Gegründet 1917 · Linkes Spektrum · Zwischen SPD und KPD</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die USPD spaltete sich 1917 von der SPD ab, weil sie den Kriegskrediten nicht zustimmen wollte. Sie stand zwischen der gemäßigten SPD und der revolutionären KPD. Bei der Wahl 1919 erhielt sie 7,6 % – und verschwand bis 1922 wieder, als viele Mitglieder zu SPD oder KPD wechselten.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="uspd-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="uspd-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="uspd-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="uspd-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="uspd-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">7,6 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">22 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1917</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfiguren</div><div class="info-tile-value">Hugo Haase, Karl Kautsky</div></div>
+                <div class="info-tile"><div class="info-tile-label">Auflösung</div><div class="info-tile-value">1922 (Spaltung)</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Linke Opposition, kurzlebig</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="uspd-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#fbeee8;">🕊️</div><div class="demand-body"><strong>Sofortiger Frieden</strong><p>Ablehnung des Ersten Weltkriegs und Forderung nach sofortigem Waffenstillstand ohne Annexionen.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fbeee8;">✊</div><div class="demand-body"><strong>Radikale Sozialreformen</strong><p>Umfassende Sozialisierung der Wirtschaft, weit über die SPD-Forderungen hinaus.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fbeee8;">🗳️</div><div class="demand-body"><strong>Demokratische Kontrolle</strong><p>Stärkung der Arbeiter- und Soldatenräte als demokratisches Gegengewicht.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#fbeee8;">🤝</div><div class="demand-body"><strong>Gewerkschaftliche Stärke</strong><p>Ausbau der Gewerkschaften als Machtinstrument der Arbeiterbewegung.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="uspd-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:15%;background:#C2410C;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:55%;background:#C2410C;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:15%;background:#C2410C;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:10%;background:#C2410C;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="uspd-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur USPD</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Warum spaltete sich die USPD von der SPD ab? Was war der konkrete Auslöser?</span></li>
+                    <li><span class="task-num">2</span><span>Was sind Arbeiter- und Soldatenräte? Welche Rolle spielten sie 1918/19?</span></li>
+                    <li><span class="task-num">3</span><span>Warum hatte die USPD so wenig Bestand? Erkläre die Ursachen ihrer Spaltung 1922.</span></li>
+                    <li><span class="task-num">4</span><span>Vergleiche USPD und SPD: Was verbindet, was trennt die beiden Parteien?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ DNVP ░░░ -->
+    <div class="detail-panel" id="detail-dnvp">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#78350F;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">DNVP · Deutschnationale Volkspartei</h3>
+                <p class="detail-hero-subtitle">Gegründet 1918 · Rechtskonservativ · Gegner der Republik</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die DNVP erzielte 1919 rund 10,3 % der Stimmen und vereinte konservative, monarchistische und nationalistische Kräfte. Sie lehnte die Republik und den Versailler Vertrag grundsätzlich ab. In den späten 1920er Jahren öffnete sie sich zunehmend für Kooperationen mit der NSDAP.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="dnvp-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="dnvp-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="dnvp-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="dnvp-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="dnvp-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">10,3 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">44 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1918</div></div>
+                <div class="info-tile"><div class="info-tile-label">Führungsfigur</div><div class="info-tile-value">Alfred Hugenberg</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Adel, Großgrundbesitzer, Offiziere</div></div>
+                <div class="info-tile"><div class="info-tile-label">Haltung zur WR</div><div class="info-tile-value">Fundamentale Ablehnung</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="dnvp-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#f0e8df;">👑</div><div class="demand-body"><strong>Monarchismus</strong><p>Rückkehr zur Monarchie, zumindest zu einer autoritären Regierungsform statt parlamentarischer Demokratie.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#f0e8df;">🚫</div><div class="demand-body"><strong>Ablehnung Versailles</strong><p>Revision des Versailler Vertrags als „Diktat" und Ablehnung der deutschen Kriegsschuldanerkennung.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#f0e8df;">⚔️</div><div class="demand-body"><strong>Starkes Militär</strong><p>Wiederaufbau der deutschen Wehrmacht und Ablehnung von Abrüstungsvereinbarungen.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#f0e8df;">🏡</div><div class="demand-body"><strong>Traditionelle Ordnung</strong><p>Verteidigung der alten gesellschaftlichen Hierarchien, Adel, Großgrundbesitz und kirchlicher Institutionen.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="dnvp-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:90%;background:#78350F;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:15%;background:#78350F;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:75%;background:#78350F;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:80%;background:#78350F;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="dnvp-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur DNVP</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Was bedeutet „Monarchismus"? Erkläre, warum viele Deutsche 1919 die Monarchie nicht vergessen wollten.</span></li>
+                    <li><span class="task-num">2</span><span>Was ist die „Dolchstoßlegende"? Wie nutzte die DNVP diese Erzählung?</span></li>
+                    <li><span class="task-num">3</span><span>Alfred Hugenberg kooperierte 1933 mit Hitler. Warum gilt das als fataler Fehler?</span></li>
+                    <li><span class="task-num">4</span><span>Vergleiche DNVP und NSDAP: Worin lagen Gemeinsamkeiten und Unterschiede?</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <!-- ░░░ DDP ░░░ -->
+    <div class="detail-panel" id="detail-ddp">
+        <div class="detail-hero">
+            <div class="detail-hero-header" style="background:#1E40AF;">
+                <span class="detail-hero-tag">Deine Partei</span>
+                <h3 class="detail-hero-title">DDP · Deutsche Demokratische Partei</h3>
+                <p class="detail-hero-subtitle">Gegründet 1918 · Linksliberal · Gründungspartei der Weimarer Republik</p>
+            </div>
+            <div class="detail-hero-body">
+                <p>Die DDP erzielte 1919 mit 18,6 % ihr bestes Ergebnis und war Teil der Weimarer Koalition. Sie stand für liberale Demokratie, Bürgerrechte und eine soziale Marktwirtschaft. Zu ihren prominenten Unterstützern zählte Max Weber. Bis 1930 verlor sie dramatisch an Wählerinnen und Wählern.</p>
+            </div>
+        </div>
+        <div class="detail-tabs">
+            <button class="detail-tab active" data-tab="ddp-facts">📊 Steckbrief</button>
+            <button class="detail-tab" data-tab="ddp-demands">📜 Forderungen</button>
+            <button class="detail-tab" data-tab="ddp-spectrum">🧭 Politisches Spektrum</button>
+            <button class="detail-tab" data-tab="ddp-tasks">✏️ Aufgaben</button>
+        </div>
+        <div class="detail-content-panel active" id="ddp-facts">
+            <div class="info-grid">
+                <div class="info-tile"><div class="info-tile-label">Wahlergebnis 1919</div><div class="info-tile-value">18,6 %</div></div>
+                <div class="info-tile"><div class="info-tile-label">Sitze in der NV</div><div class="info-tile-value">75 von 421</div></div>
+                <div class="info-tile"><div class="info-tile-label">Gründungsjahr</div><div class="info-tile-value">1918</div></div>
+                <div class="info-tile"><div class="info-tile-label">Prominenter Unterstützer</div><div class="info-tile-value">Max Weber</div></div>
+                <div class="info-tile"><div class="info-tile-label">Wählerschaft</div><div class="info-tile-value">Gebildetes Bürgertum, Liberale</div></div>
+                <div class="info-tile"><div class="info-tile-label">Rolle in der WR</div><div class="info-tile-value">Weimarer Koalition, Demokratiestütze</div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="ddp-demands">
+            <ul class="demand-list">
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eef8;">🗽</div><div class="demand-body"><strong>Liberale Demokratie</strong><p>Starke Grundrechte, Pressefreiheit, Gewaltenteilung – Demokratie als Grundprinzip.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eef8;">⚖️</div><div class="demand-body"><strong>Soziale Marktwirtschaft</strong><p>Freie Wirtschaft mit sozialer Verantwortung – Mittelweg zwischen Kapitalismus und Sozialismus.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eef8;">🧪</div><div class="demand-body"><strong>Bildung & Wissenschaft</strong><p>Starke Investitionen in Bildung, Wissenschaft und kulturellen Fortschritt.</p></div></li>
+                <li class="demand-item"><div class="demand-icon" style="background:#e8eef8;">🤝</div><div class="demand-body"><strong>Internationale Verständigung</strong><p>Völkerbund, Abrüstung und friedliche Revision des Versailler Vertrags.</p></div></li>
+            </ul>
+        </div>
+        <div class="detail-content-panel" id="ddp-spectrum">
+            <div class="spectrum-section">
+                <div class="spectrum-row"><span class="spectrum-label">Links–Rechts</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:40%;background:#1E40AF;"></div></div><div class="spectrum-pole"><span>Links</span><span>Rechts</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Demokratie</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:95%;background:#1E40AF;"></div></div><div class="spectrum-pole"><span>Autoritär</span><span>Demokratisch</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Wirtschaft</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:65%;background:#1E40AF;"></div></div><div class="spectrum-pole"><span>Sozialistisch</span><span>Marktwirtschaft</span></div></div></div>
+                <div class="spectrum-row"><span class="spectrum-label">Religion</span><div><div class="spectrum-track"><div class="spectrum-fill" style="width:30%;background:#1E40AF;"></div></div><div class="spectrum-pole"><span>Säkular</span><span>Religiös</span></div></div></div>
+            </div>
+        </div>
+        <div class="detail-content-panel" id="ddp-tasks">
+            <div class="task-box">
+                <div class="task-box-header"><div class="task-icon">✏️</div><h3>Deine Aufgaben zur DDP</h3></div>
+                <ol class="task-list">
+                    <li><span class="task-num">1</span><span>Was versteht man unter „Linksliberalismus"? Wo auf dem politischen Spektrum ordnest du die DDP ein?</span></li>
+                    <li><span class="task-num">2</span><span>Max Weber unterstützte die DDP. Was weißt du über ihn? Welche politischen Ideen vertrat er?</span></li>
+                    <li><span class="task-num">3</span><span>Die DDP verlor bis 1930 fast alle Wähler. Was waren die Gründe dafür?</span></li>
+                    <li><span class="task-num">4</span><span>Welche Partei könnte man als heutige „Nachfolgerin" der DDP bezeichnen? Begründe deine Meinung.</span></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+</div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SECTION 3: VERGLEICH
+══════════════════════════════════════════ -->
+<section id="section-compare">
+<div class="container">
+    <h2 class="section-heading">Parteienvergleich 1919</h2>
+    <p class="section-lead">Eine Übersicht aller Parteien mit ihren wichtigsten Kennzahlen und politischen Positionen.</p>
+
+    <div class="compare-table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Partei</th>
+                    <th>Stimmen 1919</th>
+                    <th>Spektrum</th>
+                    <th>Haltung zur Republik</th>
+                    <th>Hauptwähler</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SPD</strong></td>
+                    <td>37,9 %</td>
+                    <td><span class="badge" style="background:#E3000F;">Links</span></td>
+                    <td>Gründerin &amp; Stütze</td>
+                    <td>Industriearbeiter</td>
+                </tr>
+                <tr>
+                    <td><strong>DDP</strong></td>
+                    <td>18,6 %</td>
+                    <td><span class="badge" style="background:#1E40AF;">Linksliberal</span></td>
+                    <td>Stütze</td>
+                    <td>Gebildetes Bürgertum</td>
+                </tr>
+                <tr>
+                    <td><strong>Zentrum</strong></td>
+                    <td>19,7 %</td>
+                    <td><span class="badge" style="background:#4A5568;">Mitte</span></td>
+                    <td>Koalitionspartner</td>
+                    <td>Katholiken</td>
+                </tr>
+                <tr>
+                    <td><strong>DVP</strong></td>
+                    <td>4,4 %</td>
+                    <td><span class="badge" style="background:#2563EB;">Rechtsliberal</span></td>
+                    <td>Pragmatisch</td>
+                    <td>Bürgertum, Industrie</td>
+                </tr>
+                <tr>
+                    <td><strong>DNVP</strong></td>
+                    <td>10,3 %</td>
+                    <td><span class="badge" style="background:#78350F;">Rechts</span></td>
+                    <td>Ablehnung</td>
+                    <td>Adel, Großgrundbesitzer</td>
+                </tr>
+                <tr>
+                    <td><strong>USPD</strong></td>
+                    <td>7,6 %</td>
+                    <td><span class="badge" style="background:#C2410C;">Radikal links</span></td>
+                    <td>Kritisch</td>
+                    <td>Radikale Arbeiter</td>
+                </tr>
+                <tr>
+                    <td><strong>KPD</strong></td>
+                    <td>Boykott</td>
+                    <td><span class="badge" style="background:#B71C1C;">Kommunistisch</span></td>
+                    <td>Ablehnung</td>
+                    <td>Revolutionäre</td>
+                </tr>
+                <tr>
+                    <td><strong>NSDAP</strong></td>
+                    <td>Noch nicht gegr.</td>
+                    <td><span class="badge" style="background:#2C2C2C;">Rechtsextrem</span></td>
+                    <td>Feind</td>
+                    <td>Ab 1930: Krisenverlierer</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</section>
+
+</main>
+
+<footer>
+    <p>Unterrichtsmaterial · Weimarer Republik 1919–1933 · Erstellt für den Geschichtsunterricht</p>
+</footer>
+
+<script>
+// ── Tab-Navigation (Haupt-Tabs) ──
+const tabBtns = document.querySelectorAll('.tab-btn');
+const sections = {
+    overview: document.getElementById('section-overview'),
+    detail:   document.getElementById('section-detail'),
+    compare:  document.getElementById('section-compare')
+};
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const target = btn.dataset.section;
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        Object.entries(sections).forEach(([key, el]) => {
+            if (key === target) {
+                el.style.display = 'block';
+                requestAnimationFrame(() => el.classList.add('visible'));
+            } else {
+                el.style.display = 'none';
+                el.classList.remove('visible');
+            }
+        });
+        // section-overview hat kein visible-toggle nötig
+        if (target === 'overview') {
+            sections.overview.style.display = 'block';
+        }
+    });
+});
+
+// ── Partei-Auswahl im Detail-Bereich ──
+const pills = document.querySelectorAll('.party-pill');
+const panels = document.querySelectorAll('.detail-panel');
+
+pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+        const party = pill.dataset.party;
+        // Pills
+        pills.forEach(p => p.classList.remove('selected'));
+        pill.classList.add('selected');
+        // Panels
+        panels.forEach(p => p.classList.remove('active'));
+        const target = document.getElementById('detail-' + party);
+        if (target) {
+            target.classList.add('active');
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+});
+
+// ── Inner Detail-Tabs (je Partei) ──
+document.addEventListener('click', e => {
+    const tab = e.target.closest('.detail-tab');
+    if (!tab) return;
+    const panel = tab.closest('.detail-panel');
+    if (!panel) return;
+    const tabKey = tab.dataset.tab;
+    // Tabs deactivate
+    panel.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    // Content panels
+    panel.querySelectorAll('.detail-content-panel').forEach(cp => cp.classList.remove('active'));
+    const content = document.getElementById(tabKey);
+    if (content) content.classList.add('active');
+});
+</script>
+
+</body>
+</html>
